@@ -20,22 +20,23 @@ sampleCodeDemo();
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo () {
-    console.log("Hiver IoT starter Kit for BLE Application. Kit Version:" + pjson.version);
-    console.log("--------------------------------------");
-    console.log("|    BLE Module Demo Option Menu     |");
-    console.log("|------------------------------------|");
-    console.log("| Option |   BLE Module Option       |");
-    console.log("|------------------------------------|");
-    console.log("|   1.   |   Power Meter Relay       |");
-    console.log("|   2.   |        ZIGBEE             |");
-    console.log("|   3.   |        ZWAVE              |");
-    console.log("|   4.   |        HUE                |");
-    console.log("--------------------------------------");
-    console.log("Please enter your option number            :");
+    console.log("   Hiver IoT starter Kit for BLE Application. Demo  Version:");
+    console.log("   --------------------------------------");
+    console.log("   |    BLE Module Demo Option Menu     |");
+    console.log("   |------------------------------------|");
+    console.log("   | Option |   BLE Module Option       |");
+    console.log("   |------------------------------------|");
+    console.log("   |   1.   |   Power Meter Relay       |");
+    console.log("   |   2.   |   Weather Station         |");
+    console.log("   |   3.   |   Gas Alarm               |");
+    console.log("   |   4.   |   Remote Controller       |");
+    console.log("   --------------------------------------");
+    console.log("   hiver-iot-kit-ble v:" + pjson.version);    
+    console.log("   Please enter your option number            :");
 	readConsoleInput(function(data) {
         showWelcomeMsg();
         setLeaveMsg();
-        console.log("Please power on your modules.           ");
+        console.log("   Please power on your modules.           ");
 		switch(data) 
 		{
 			case "1":
@@ -51,7 +52,7 @@ function sampleCodeDemo () {
 
 			break;            
 			default :
-				console.log("Choose a valid option :  ");
+				console.log("   Choose a valid option :  ");
 				sampleCodeDemo();
 		}
 	});
@@ -119,7 +120,7 @@ function setLeaveMsg() {
 /**********************************/
 /* Private Input Function         */
 /**********************************/
-var readConsoleInput = function (callBack) {
+function readConsoleInput (callBack) {
 	var input = stdin.listeners('data');
     
 	if( input[0] && input ) {
