@@ -1,5 +1,6 @@
 // sample code for BLE power meter relay module
-var _ = require('busyman');
+var _ = require('busyman'),
+    chalk = require('chalk');
 
 var options = {
         baudRate: 115200,
@@ -22,18 +23,18 @@ central.start();
 /************************/
 /*** central is ready ***/
 central.on('ready', function () {
-    console.log('[         ready ] ');
+    console.log(chalk.green('[         ready ] '));
     bleApp(central);
 });
 
 /*** permitJoining    ***/
 central.on('permitJoining', function (timeLeft) {
-    console.log('[ permitJoining ] ' + timeLeft + ' sec');
+    console.log(chalk.green('[ permitJoining ] ') + timeLeft + ' sec');
 });
 
 /*** error            ***/
 central.on('error', function (err) {
-    console.log('[         error ] ' + err.message);
+    console.log(chalk.red('[         error ] ') + err.message);
 });
 
 
@@ -60,7 +61,7 @@ function bleApp (central) {
 		switch (msg.type) {
             /*** devIncoming      ***/        
 			case 'devIncoming':
-                console.log('[   devIncoming ] ' + '@' + dev.addr + ', ' + dev.name ); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name ); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 
 				if(dev.name === 'relay') {
 					relay = dev;					                  
@@ -128,17 +129,22 @@ function bleApp (central) {
 
             /***   devStatus     ***/
             case 'devStatus':
-                console.log('[     devStatus ] ' + '@' + dev.addr + ', ' + msg.data);
+                var status
+                if (msg.data === 'online')
+                    status = chalk.green(msg.data);
+                else 
+                    status = chalk.red(msg.data);
+                console.log(chalk.magenta('[     devStatus ] ') + '@' + dev.addr + ', ' + status);
                 break;
 
             /***   devLeaving    ***/
             case 'devLeaving':
-				console.log('[    devLeaving ]' + '@' + dev.addr);
+				console.log(chalk.yellow('[    devLeaving ]') + '@' + dev.addr);
 				break;
 
             /***   attrsChange   ***/                
 			case 'attChange':
-                //console.log('[   attrsChange ] ' + '@' + dev.addr + ', ' + dev.name + ', ' + msg.data.sid.uuid + ', ' + msg.data.cid.uuid + ', ' + JSON.stringify(msg.data.value));  // print all attribute changes once received.
+                //console.log(chalk.blue('[   attrsChange ] ') + '@' + dev.addr + ', ' + dev.name + ', ' + msg.data.sid.uuid + ', ' + msg.data.cid.uuid + ', ' + JSON.stringify(msg.data.value));  // print all attribute changes once received.
 				break;
             /***   attNotify     ***/                   
 			case 'attNotify':				
