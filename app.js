@@ -121,7 +121,8 @@ function setLeaveMsg() {
 /* Private Input Function         */
 /**********************************/
 function readConsoleInput (callBack) {
-	var input = stdin.listeners('data');
+    var stdin = process.openStdin(),
+        input = stdin.listeners('data');
     
 	if( input[0] && input ) {
         stdin.removeListener("data", input[0] );
