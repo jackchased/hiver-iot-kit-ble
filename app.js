@@ -19,8 +19,7 @@ sampleCodeDemo();
 /**********************************/
 /* Module Menu List               */
 /**********************************/
-var sampleCodeDemo = function()
-{
+function sampleCodeDemo () {
     console.log("Hiver IoT starter Kit for BLE Application. Kit Version:" + pjson.version);
     console.log("--------------------------------------");
     console.log("|    BLE Module Demo Option Menu     |");
