@@ -20,7 +20,7 @@ sampleCodeDemo();
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo () {
-    console.log("   Hiver IoT starter Kit for BLE Application. Demo  Version:");
+    console.log(" Hiver IoT starter Kit for BLE Application. ");
     console.log("   --------------------------------------");
     console.log("   |    BLE Module Demo Option Menu     |");
     console.log("   |------------------------------------|");
@@ -31,12 +31,13 @@ function sampleCodeDemo () {
     console.log("   |   3.   |   Gas Alarm               |");
     console.log("   |   4.   |   Remote Controller       |");
     console.log("   --------------------------------------");
-    console.log("   hiver-iot-kit-ble v:" + pjson.version);    
-    console.log("   Please enter your option number            :");
+    console.log(" hiver-iot-kit-ble v:" + pjson.version);    
+    console.log(" Please enter your option number :");
 	readConsoleInput(function(data) {
+        console.log(data);
         showWelcomeMsg();
         setLeaveMsg();
-        console.log("   Please power on your modules.           ");
+        console.log(" Please power on your modules. ");
 		switch(data) 
 		{
 			case "1":
@@ -52,7 +53,7 @@ function sampleCodeDemo () {
 
 			break;            
 			default :
-				console.log("   Choose a valid option :  ");
+				console.log(" Choose a valid option :  ");
 				sampleCodeDemo();
 		}
 	});
