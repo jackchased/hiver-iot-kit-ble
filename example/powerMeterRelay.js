@@ -69,8 +69,6 @@ function bleApp (central) {
 			case 'devIncoming':
                 var fwRev = dev.findChar('0x180a', '0x2a26').value.firmwareRev;
                 console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ' ' + fwRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
-
-                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name ); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 
 				if(dev.name === 'relay') {
 					relay = dev;					                  
