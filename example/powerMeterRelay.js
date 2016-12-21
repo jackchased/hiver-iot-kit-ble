@@ -14,29 +14,35 @@ var BShepherd = require('ble-shepherd'),
 
 var relayPlugin = require('bshep-plugin-sivann-relay'); // place the bshep-plugin-sivann-xxx.js file at the same directory with the xxxxSampleCode.js 
 
-central.support('relay', relayPlugin);
+function app () {
+    central.support('relay', relayPlugin);
 
-central.start();
+    central.start();
+    
+/**********************************/
+/* set Leave Msg                  */
+/**********************************/
+    setLeaveMsg()
 
 /************************/
 /* Event handle         */
 /************************/
-/*** central is ready ***/
-central.on('ready', function () {
-    console.log(chalk.green('[         ready ] '));
-    bleApp(central);
-});
+    /*** central is ready ***/
+    central.on('ready', function () {
+        console.log(chalk.green('[         ready ] '));
+        bleApp(central);
+    });
 
-/*** permitJoining    ***/
-central.on('permitJoining', function (timeLeft) {
-    console.log(chalk.green('[ permitJoining ] ') + timeLeft + ' sec');
-});
+    /*** permitJoining    ***/
+    central.on('permitJoining', function (timeLeft) {
+        console.log(chalk.green('[ permitJoining ] ') + timeLeft + ' sec');
+    });
 
-/*** error            ***/
-central.on('error', function (err) {
-    console.log(chalk.red('[         error ] ') + err.message);
-});
-
+    /*** error            ***/
+    central.on('error', function (err) {
+        console.log(chalk.red('[         error ] ') + err.message);
+    });
+}
 
 /**********************************/
 /* BLE Application                */
@@ -61,6 +67,9 @@ function bleApp (central) {
 		switch (msg.type) {
             /*** devIncoming      ***/        
 			case 'devIncoming':
+                var fwRev = dev.findChar('0x180a', '0x2a26').value.firmwareRev;
+                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ' ' + fwRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+
                 console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name ); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 
 				if(dev.name === 'relay') {
@@ -316,4 +325,34 @@ function configNotifyAll(dev) {
 	});
 
 	return devData;
+}
+
+/**********************************/
+/* Goodbye Msg Function           */
+/**********************************/
+function setLeaveMsg() {
+    process.stdin.resume();
+
+    function stopShepherd() {
+        central.stop(function () {
+            process.exit(1);
+        });
+    }
+
+    function showLeaveMessage() {
+        console.log(' ');
+        console.log(chalk.blue('      _____              __      __                  '));
+        console.log(chalk.blue('     / ___/ __  ___  ___/ /____ / /  __ __ ___       '));
+        console.log(chalk.blue('    / (_ // _ \\/ _ \\/ _  //___// _ \\/ // // -_)   '));
+        console.log(chalk.blue('    \\___/ \\___/\\___/\\_,_/     /_.__/\\_, / \\__/ '));
+        console.log(chalk.blue('                                   /___/             '));
+        console.log(' ');
+        console.log('    >>> This is a simple demonstration of how the shepherd works.');
+        console.log('    >>> Please visit the link to know more about this project:   ');
+        console.log('    >>>   ' + chalk.yellow('https://github.com/bluetoother/ble-shepherd'));
+        console.log(' ');
+    }
+
+    process.on('SIGINT', stopShepherd);
+    process.on('exit', showLeaveMessage);
 }

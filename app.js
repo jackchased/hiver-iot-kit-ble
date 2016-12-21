@@ -20,7 +20,12 @@ sampleCodeDemo();
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo () {
-    console.log(" Hiver IoT starter Kit for BLE Application. ");
+    console.log("   Hiver IoT starter Kit for BLE Application. ");
+    console.log("   >>> hiver-iot-kit-ble version: " + pjson.version);    
+    console.log('   >>> plugin-relay version: ' + pjson.dependencies['bshep-plugin-sivann-relay'] );
+    console.log('   >>> plugin-gassensor version: ' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
+    console.log('   >>> plugin-weatherstation version: ' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
+    console.log('   >>> plugin-remotecontrol version: ' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );      
     console.log("   --------------------------------------");
     console.log("   |    BLE Module Demo Option Menu     |");
     console.log("   |------------------------------------|");
@@ -30,9 +35,8 @@ function sampleCodeDemo () {
     console.log("   |   2.   |   Weather Station         |");
     console.log("   |   3.   |   Gas Alarm               |");
     console.log("   |   4.   |   Remote Controller       |");
-    console.log("   --------------------------------------");
-    console.log(" hiver-iot-kit-ble v:" + pjson.version);    
-    console.log(" Please enter your option number :");
+    console.log("   --------------------------------------");         
+    console.log("   Please enter your option number :");
 	readConsoleInput(function(data) {
         console.log(data);
         showWelcomeMsg();
@@ -79,7 +83,7 @@ function showWelcomeMsg() {
     console.log(chalk.gray('         A network server and manager for the BLE machine network'));
     console.log('');
     console.log('   >>> Author:     Hedy Wang (hedywings@gmail.com)');
-    console.log('   >>> Version:    ble-shepherd + ' + pjson.dependencies.ble-shepherd );             
+    console.log('   >>> Version:    ble-shepherd + ' + pjson.dependencies['ble-shepherd'] );              
     console.log('   >>> Document:   https://github.com/bluetoother/ble-shepherd');
     console.log('   >>> Copyright (c) 2016 Hedy Wang, The MIT License (MIT)');
     console.log('');
