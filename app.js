@@ -36,7 +36,7 @@ function sampleCodeDemo () {
     console.log("   |   3.   |   Gas Alarm               |");
     console.log("   |   4.   |   Remote Controller       |");
     console.log("   --------------------------------------");         
-    console.log("   Please enter your option number :");
+    console.log("   Please key in your option number and hit enter:");
 	readConsoleInput(function(data) {
         console.log(data);
         showWelcomeMsg();
