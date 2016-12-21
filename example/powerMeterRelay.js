@@ -356,3 +356,5 @@ function setLeaveMsg() {
     process.on('SIGINT', stopShepherd);
     process.on('exit', showLeaveMessage);
 }
+
+module.exports = app;
