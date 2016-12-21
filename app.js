@@ -40,7 +40,6 @@ function sampleCodeDemo () {
 	readConsoleInput(function(data) {
         console.log(data);
         showWelcomeMsg();
-        setLeaveMsg();
         console.log(" Please power on your modules. ");
 		switch(data) 
 		{
@@ -83,43 +82,13 @@ function showWelcomeMsg() {
     console.log(chalk.gray('         A network server and manager for the BLE machine network'));
     console.log('');
     console.log('   >>> Author:     Hedy Wang (hedywings@gmail.com)');
-    console.log('   >>> Version:    ble-shepherd + ' + pjson.dependencies['ble-shepherd'] );              
+    console.log('   >>> Version:    ble-shepherd v:' + pjson.dependencies['ble-shepherd'] );              
     console.log('   >>> Document:   https://github.com/bluetoother/ble-shepherd');
     console.log('   >>> Copyright (c) 2016 Hedy Wang, The MIT License (MIT)');
     console.log('');
     console.log('The server is up and running, press Ctrl+C to stop server.');
     console.log('');
     console.log('---------------------------------------------------------------');
-}
-
-/**********************************/
-/* Goodbye Msg Function           */
-/**********************************/
-function setLeaveMsg() {
-    process.stdin.resume();
-
-    function stopShepherd() {
-        central.stop(function () {
-            process.exit(1);
-        });
-    }
-
-    function showLeaveMessage() {
-        console.log(' ');
-        console.log(chalk.blue('      _____              __      __                  '));
-        console.log(chalk.blue('     / ___/ __  ___  ___/ /____ / /  __ __ ___       '));
-        console.log(chalk.blue('    / (_ // _ \\/ _ \\/ _  //___// _ \\/ // // -_)   '));
-        console.log(chalk.blue('    \\___/ \\___/\\___/\\_,_/     /_.__/\\_, / \\__/ '));
-        console.log(chalk.blue('                                   /___/             '));
-        console.log(' ');
-        console.log('    >>> This is a simple demonstration of how the shepherd works.');
-        console.log('    >>> Please visit the link to know more about this project:   ');
-        console.log('    >>>   ' + chalk.yellow('https://github.com/bluetoother/ble-shepherd'));
-        console.log(' ');
-    }
-
-    process.on('SIGINT', stopShepherd);
-    process.on('exit', showLeaveMessage);
 }
 
 /**********************************/
