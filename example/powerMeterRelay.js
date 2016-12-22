@@ -9,14 +9,13 @@ var options = {
     };
 
 var BShepherd = require('ble-shepherd'),
-	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
+	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used
     // central = new BShepherd('cc-bnp', '/dev/ttyACM0', options); // use 'cc-bnp' when cc2540 USB dongle is used.
 
-var relayPlugin = require('bshep-plugin-sivann-relay'); // place the bshep-plugin-sivann-xxx.js file at the same directory with the xxxxSampleCode.js 
+var relayPlugin = require('bshep-plugin-sivann-relay'); 
 
 function app () {
-    central.support('relay', relayPlugin);
-
+    central.support('relay', relayPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
     
 /**********************************/
@@ -70,10 +69,10 @@ function bleApp (central) {
                 var fwRev = dev.findChar('0x180a', '0x2a26').value.firmwareRev;
                 console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ' ' + fwRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 
-				if(dev.name === 'relay') {
+				if (dev.name === 'relay') {
 					relay = dev;					                  
                     /***  write your application here   ***/          
-                    
+                   
                     // you can call the private function to enable all the indication/notification of each Characteristic automatically.                    
                     configNotifyAll(relay); 
                     // you can also manually enable or disable the indication/notification of each Characteristic.
@@ -112,7 +111,7 @@ function bleApp (central) {
                                 if (err) 
                                     console.log('[         error ] ' + err);
                                 else 
-                                    console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommand range: 100-255)
+                                    console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });                              																		
                             break;
                         case '0x689e192a8e2d':                                                    
@@ -126,7 +125,7 @@ function bleApp (central) {
                                 if (err) 
                                     console.log('[         error ] ' + err);
                                 else 
-                                    console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommand range: 100-255)
+                                    console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             }); 
 							break;
                     }  
