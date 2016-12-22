@@ -27,6 +27,11 @@ var BShepherd = require('ble-shepherd'),
 sampleCodeDemo(central);
 
 /**********************************/
+/* set Leave Msg                  */
+/**********************************/
+setLeaveMsg()
+
+/**********************************/
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo (central) {
@@ -54,16 +59,16 @@ function sampleCodeDemo (central) {
 		switch(data) 
 		{
 			case "1":
-				powerMeterRelay(central);	
+				powerMeterRelay(central); // you can modify sample code in ./example/
 			break;
 			case "2":
-                weatherStation(central);
+                weatherStation(central); // you can modify sample code in ./example/
 			break;
 			case "3":
-                gasAlarm(central);
+                gasAlarm(central);      // you can modify sample code in ./example/
 			break;
 			case "4":
-                remoteControl(central);
+                remoteControl(central); // you can modify sample code in ./example/
 			break;            
 			default :
 				console.log("Choose a valid option :  ");
@@ -99,6 +104,36 @@ function showWelcomeMsg() {
     console.log('The server is up and running, press Ctrl+C to stop server.');
     console.log('');
     console.log('---------------------------------------------------------------');
+}
+
+/**********************************/
+/* Goodbye Msg Function           */
+/**********************************/
+function setLeaveMsg() {
+    process.stdin.resume();
+
+    function stopShepherd() {
+        central.stop(function () {
+            process.exit(1);
+        });
+    }
+
+    function showLeaveMessage() {
+        console.log(' ');
+        console.log(chalk.blue('      _____              __      __                  '));
+        console.log(chalk.blue('     / ___/ __  ___  ___/ /____ / /  __ __ ___       '));
+        console.log(chalk.blue('    / (_ // _ \\/ _ \\/ _  //___// _ \\/ // // -_)   '));
+        console.log(chalk.blue('    \\___/ \\___/\\___/\\_,_/     /_.__/\\_, / \\__/ '));
+        console.log(chalk.blue('                                   /___/             '));
+        console.log(' ');
+        console.log('    >>> This is a simple demonstration of how the shepherd works.');
+        console.log('    >>> Please visit the link to know more about this project:   ');
+        console.log('    >>>   ' + chalk.yellow('https://github.com/bluetoother/ble-shepherd'));
+        console.log(' ');
+    }
+
+    process.on('SIGINT', stopShepherd);
+    process.on('exit', showLeaveMessage);
 }
 
 /**********************************/

@@ -4,14 +4,9 @@ var _ = require('busyman'),
 
 var gasSensorPlugin = require('bshep-plugin-sivann-gassensor'); 
 
-function app () {
+function app (central) {
     central.support('gasSensor', gasSensorPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
-    
-/**********************************/
-/* set Leave Msg                  */
-/**********************************/
-    setLeaveMsg()
 
 /************************/
 /* Event handle         */
@@ -229,36 +224,6 @@ function configNotifyAll(dev) {
 	});
 
 	return devData;
-}
-
-/**********************************/
-/* Goodbye Msg Function           */
-/**********************************/
-function setLeaveMsg() {
-    process.stdin.resume();
-
-    function stopShepherd() {
-        central.stop(function () {
-            process.exit(1);
-        });
-    }
-
-    function showLeaveMessage() {
-        console.log(' ');
-        console.log(chalk.blue('      _____              __      __                  '));
-        console.log(chalk.blue('     / ___/ __  ___  ___/ /____ / /  __ __ ___       '));
-        console.log(chalk.blue('    / (_ // _ \\/ _ \\/ _  //___// _ \\/ // // -_)   '));
-        console.log(chalk.blue('    \\___/ \\___/\\___/\\_,_/     /_.__/\\_, / \\__/ '));
-        console.log(chalk.blue('                                   /___/             '));
-        console.log(' ');
-        console.log('    >>> This is a simple demonstration of how the shepherd works.');
-        console.log('    >>> Please visit the link to know more about this project:   ');
-        console.log('    >>>   ' + chalk.yellow('https://github.com/bluetoother/ble-shepherd'));
-        console.log(' ');
-    }
-
-    process.on('SIGINT', stopShepherd);
-    process.on('exit', showLeaveMessage);
 }
 
 module.exports = app;

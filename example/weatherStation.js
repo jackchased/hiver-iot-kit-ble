@@ -2,26 +2,11 @@
 var _ = require('busyman'),
     chalk = require('chalk');
 
-var options = {
-        baudRate: 115200,
-        rtscts: true,
-        flowControl: true
-    };
-
-var BShepherd = require('ble-shepherd'),
-	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
-    // central = new BShepherd('cc-bnp', '/dev/ttyACM0', options); // use 'cc-bnp' when cc2540 USB dongle is used.
-
 var weatherPlugin = require('bshep-plugin-sivann-weatherstation'); 
 
 function app (central) {
     central.support('weatherStation', weatherPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
-    
-/**********************************/
-/* set Leave Msg                  */
-/**********************************/
-    setLeaveMsg()
 
 /************************/
 /* Event handle         */
@@ -256,36 +241,6 @@ function configNotifyAll(dev) {
 	});
 
 	return devData;
-}
-
-/**********************************/
-/* Goodbye Msg Function           */
-/**********************************/
-function setLeaveMsg() {
-    process.stdin.resume();
-
-    function stopShepherd() {
-        central.stop(function () {
-            process.exit(1);
-        });
-    }
-
-    function showLeaveMessage() {
-        console.log(' ');
-        console.log(chalk.blue('      _____              __      __                  '));
-        console.log(chalk.blue('     / ___/ __  ___  ___/ /____ / /  __ __ ___       '));
-        console.log(chalk.blue('    / (_ // _ \\/ _ \\/ _  //___// _ \\/ // // -_)   '));
-        console.log(chalk.blue('    \\___/ \\___/\\___/\\_,_/     /_.__/\\_, / \\__/ '));
-        console.log(chalk.blue('                                   /___/             '));
-        console.log(' ');
-        console.log('    >>> This is a simple demonstration of how the shepherd works.');
-        console.log('    >>> Please visit the link to know more about this project:   ');
-        console.log('    >>>   ' + chalk.yellow('https://github.com/bluetoother/ble-shepherd'));
-        console.log(' ');
-    }
-
-    process.on('SIGINT', stopShepherd);
-    process.on('exit', showLeaveMessage);
 }
 
 module.exports = app;
