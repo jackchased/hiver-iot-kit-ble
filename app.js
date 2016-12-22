@@ -6,10 +6,10 @@ No part of the source code may be published, uploaded, posted, transmitted, dist
 **********************************************************************************************************************************************/
 var chalk = require('chalk'),
     pjson = require('./package.json'),
+    gasAlarm = require('./example/gasAlarm'),
     powerMeterRelay = require('./example/powerMeterRelay'),
-    powerMeterRelay = require('./example/powerMeterRelay'),
-    powerMeterRelay = require('./example/powerMeterRelay'),
-    powerMeterRelay = require('./example/powerMeterRelay');
+    weatherStation = require('./example/weatherStation'),
+    remoteControl = require('./example/remoteControl');
 
 /**********************************/
 /* Start Demo App                 */
@@ -20,43 +20,44 @@ sampleCodeDemo();
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo () {
+    console.log('---------------------------------------------------------------');   
     console.log("   Hiver IoT starter Kit for BLE Application. ");
-    console.log("   >>> hiver-iot-kit-ble version: " + pjson.version);    
-    console.log('   >>> plugin-relay version: ' + pjson.dependencies['bshep-plugin-sivann-relay'] );
-    console.log('   >>> plugin-gassensor version: ' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
-    console.log('   >>> plugin-weatherstation version: ' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
-    console.log('   >>> plugin-remotecontrol version: ' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );      
-    console.log("   --------------------------------------");
-    console.log("   |    BLE Module Demo Option Menu     |");
-    console.log("   |------------------------------------|");
-    console.log("   | Option |   BLE Module Option       |");
-    console.log("   |------------------------------------|");
-    console.log("   |   1.   |   Power Meter Relay       |");
-    console.log("   |   2.   |   Weather Station         |");
-    console.log("   |   3.   |   Gas Alarm               |");
-    console.log("   |   4.   |   Remote Controller       |");
-    console.log("   --------------------------------------");         
-    console.log("   Please key in your option number and hit enter:");
-	readConsoleInput(function(data) {
+    console.log(" ");    
+    console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);    
+    console.log('   >>> plugin-meter-relay    v:' + pjson.dependencies['bshep-plugin-sivann-relay'] );
+    console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
+    console.log('   >>> plugin-weatherstation v:' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
+    console.log('   >>> plugin-remotecontrol  v:' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );
+    console.log('---------------------------------------------------------------');   
+    console.log("   >>> BLE Module Demo Option Menu.");
+    console.log(" "); 
+    console.log("       1.  Power Meter Relay       ");
+    console.log("       2.  Weather Station         ");
+    console.log("       3.  Gas Alarm               ");
+    console.log("       4.  Remote Controller       ");
+    console.log(" ");         
+    console.log("   Please key in your option [1-4] and hit enter:");
+    
+	readConsoleInput (function(data) {
         console.log(data);
         showWelcomeMsg();
-        console.log(" Please power on your modules. ");
+        console.log("Please power on your modules. ");
 		switch(data) 
 		{
 			case "1":
 				powerMeterRelay();	
 			break;
 			case "2":
-
+                weatherStation();
 			break;
 			case "3":
-
+                gasAlarm();
 			break;
 			case "4":
-
+                remoteControl();
 			break;            
 			default :
-				console.log(" Choose a valid option :  ");
+				console.log("Choose a valid option :  ");
 				sampleCodeDemo();
 		}
 	});
@@ -98,10 +99,11 @@ function readConsoleInput (callBack) {
     var stdin = process.openStdin(),
         input = stdin.listeners('data');
     
-	if( input[0] && input ) {
+	if ( input[0] && input ) {
         stdin.removeListener("data", input[0] );
 	}
-	stdin.addListener("data", function(data) {
+    
+	stdin.addListener ("data", function (data) {
     	callBack(data.toString().trim());
 	});
 }
