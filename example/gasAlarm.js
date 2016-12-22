@@ -83,11 +83,11 @@ function bleApp (central) {
                         else 
                             console.log('[ debug message ] changed the measuring gas option to Smoke.'); 
                     });
-					gasSensor.write('0xbb50', '0xbb54', {threshold: 100}, function (err) { // threshold range: 10-10000
+					gasSensor.write('0xbb50', '0xbb54', {threshold: 300}, function (err) { // threshold range: 10-10000
                         if (err)
                             console.log('[         error ] failed to change the threshold. ' + err);
                         else 
-                            console.log('[ debug message ] changed the gas threshold value to 100 ppm.'); 
+                            console.log('[ debug message ] changed the gas threshold value to 300 ppm.'); 
                     });
 					
                     //gasSensor.write('0xbb50', '0xbb51', {config : false});    // uncomment to turn off gas measurements.
@@ -107,18 +107,7 @@ function bleApp (central) {
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });                              																		
                             break;
-							gasSensor.write('0xbb50', '0xbb53', {option: 1}, function (err) { // option 0: Propane, 1: Smoke, 2: Methane, 3: Ethanol
-								if (err) 
-									console.log('[         error ] failed to change the option. ' + err);
-								else 
-									console.log('[ debug message ] changed the measuring gas option to Smoke.'); 
-							});
-							gasSensor.write('0xbb50', '0xbb54', {threshold: 500}, function (err) { // threshold range: 10-10000
-								if (err) 
-									console.log('[         error ] failed to change the threshold. ' + err);
-								else 
-									console.log('[ debug message ] changed the gas threshold value to 500 ppm.'); 
-							});
+
                         case '0x20914838225b':                                                    
                             //  write your application for the 2nd gas sensor  //                        
 							gasSensor2 = dev;    	
@@ -131,18 +120,7 @@ function bleApp (central) {
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });
-							gasSensor.write('0xbb50', '0xbb53', {option: 1}, function (err) { // option 0: Propane, 1: Smoke, 2: Methane, 3: Ethanol
-								if (err) 
-									console.log('[         error ] failed to change the option. ' + err);
-								else 
-									console.log('[ debug message ] changed the measuring gas option to Smoke.'); // (recommend range: 100-255)
-							});
-							gasSensor.write('0xbb50', '0xbb54', {threshold: 500}, function (err) { // threshold range: 10-10000
-								if (err) 
-									console.log('[         error ] failed to change the threshold. ' + err);
-								else 
-									console.log('[ debug message ] changed the gas threshold value to 500 ppm.'); // (recommend range: 100-255)
-							});
+
 							break;
                     }
  */  
