@@ -15,7 +15,7 @@ var BShepherd = require('ble-shepherd'),
 var remoteCtrlPlugin = require('bshep-plugin-sivann-remotecontrol'); 
 
 function app () {
-    central.support('remoteCtrl', relayPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
+    central.support('remoteCtrl', remoteCtrlPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
     
 /**********************************/
