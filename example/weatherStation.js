@@ -69,7 +69,7 @@ function bleApp (central) {
 					// weatherStation.configNotify('0xbb80', 65, true);        // UV Index
 					// weatherStation.configNotify('0xbb80', 69, true);        // illuminance
 					// weatherStation.configNotify('0xbb80', '0xcc11', true);  // barometer
-					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // Microphone
+					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // microphone
 					// weatherStation.configNotify('0xbb80', '0xcc1b', true);  // PM (Particle Matter)
 					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn   
                     weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn
@@ -80,8 +80,8 @@ function bleApp (central) {
                     weatherStation.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
                     weatherStation.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
                     weatherStation.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-                    weatherStation.onNotified('0xbb80', '0xcc1a', micHdlr);			// Microphone
-                    weatherStation.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particle Matter)
+                    weatherStation.onNotified('0xbb80', '0xcc1a', micHdlr);			// microphone
+                    weatherStation.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                     weatherStation.onNotified('0xbb00', '0xcc00', callbackDIn);		// DIn
                     weatherStation.onNotified('0xbb10', '0xcc02', callbackAIn);		// AIn
 					
@@ -105,8 +105,8 @@ function bleApp (central) {
 							weatherStation1.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation1.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation1.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation1.onNotified('0xbb80', '0xcc1a', micHdlr);		// Microphone
-							weatherStation1.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particle Matter)
+							weatherStation1.onNotified('0xbb80', '0xcc1a', micHdlr);		// microphone
+							weatherStation1.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation1.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
@@ -123,8 +123,8 @@ function bleApp (central) {
 							weatherStation2.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation2.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation2.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation2.onNotified('0xbb80', '0xcc1a', micHdlr);		// Microphone
-							weatherStation2.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM
+							weatherStation2.onNotified('0xbb80', '0xcc1a', micHdlr);		// microphone
+							weatherStation2.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation2.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
@@ -169,43 +169,43 @@ function bleApp (central) {
 /*****************************************************/
 function tempHdlr(data) {
     // show temp
-	console.log('[ debug message ] Temperature sensed value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Temperature : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function humidHdlr(data) {
     // show humid
-	console.log('[ debug message ] Humidity sensed value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Humidity : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function ambientLightHdlr(data) {
 	// show Ambient Light
-	console.log('[ debug message ] Ambient Light value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Ambient Light : ' + data.sensorValue + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function uvIndexHdlr(data) {
     // show uvIndex
-	console.log('[ debug message ] UV Index value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] UV Index : ' + data.sensorValue + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function barometerHdlr(data) {
     // show barometer
-	console.log('[ debug message ] Barometer sensed value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Atmospheric Pressure : ' + data.sensorValue + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function micHdlr(data) {
     // show mic
-	console.log('[ debug message ] mic dB value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Sound Level : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function pmHdlr(data) {
     // show pm
-    console.log('[ debug message ] PM value: ' + data.sensorValue + ' ' + data.units);
+    console.log('[ debug message ] Particulate Matter : ' + data.sensorValue + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
@@ -218,7 +218,7 @@ function callbackDIn(data) {
 
 function callbackAIn(data) {
     // show aIn
-    console.log('[ debug message ] aIn sensed value: ' + data.aInCurrValue + ' ' + data.sensorType);
+    console.log('[ debug message ] aIn : ' + data.aInCurrValue + ' ' + data.sensorType);
     /***  write your application here   ***/
 }
 

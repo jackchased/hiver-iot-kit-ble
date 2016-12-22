@@ -167,7 +167,7 @@ function buzzerHdlr(data) {
 
 function gasHdlr(data) {
     // show gas
-	console.log('[ debug message ] Gas sensed value: ' + data.sensorValue + ' ' + data.units);
+	console.log('[ debug message ] Gas Concentration: ' + data.sensorValue.toFixed(2) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
@@ -179,7 +179,7 @@ function callbackDIn(data) {
 
 function callbackAIn(data) {
     // show aIn
-    console.log('[ debug message ] aIn sensed value: ' + data.aInCurrValue + ' ' + data.sensorType);
+    console.log('[ debug message ] aIn : ' + data.aInCurrValue + ' ' + data.sensorType);
     /***  write your application here   ***/
 }
 

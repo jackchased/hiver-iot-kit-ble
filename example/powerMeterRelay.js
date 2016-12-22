@@ -163,25 +163,13 @@ function callbackRelay(data) {
 
 function callbackPower(data) {
     // show power
-    console.log('[ debug message ] Power : ' + data.sensorValue + ' ' + data.units);
+    console.log('[ debug message ] Power : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
     /***  write your application here   ***/      
 }
 
 function callbackCurrent(data) {
     // show current
-    console.log('[ debug message ] Current : ' + data.sensorValue + ' ' + data.units);
-    /***  write your application here   ***/  
-}
-
-function callbackMeterConfig(data) {
-    // show power
-    console.log('[ debug message ] Power : ' + data.sensorValue + ' ' + data.units);
-    /***  write your application here   ***/  
-}
-
-function callbackMeterPeriod(data) {
-    // show power
-    console.log('[ debug message ] Power : ' + data.sensorValue + ' ' + data.units);
+    console.log('[ debug message ] Current : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
     /***  write your application here   ***/  
 }
 
