@@ -14,7 +14,7 @@ var BShepherd = require('ble-shepherd'),
 
 var weatherPlugin = require('bshep-plugin-sivann-weatherstation'); 
 
-function app () {
+function app (central) {
     central.support('weatherStation', weatherPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
     

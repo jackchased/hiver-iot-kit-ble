@@ -11,15 +11,25 @@ var chalk = require('chalk'),
     weatherStation = require('./example/weatherStation'),
     remoteControl = require('./example/remoteControl');
 
+    var options = {
+        baudRate: 115200,
+        rtscts: true,
+        flowControl: true
+    };
+
+var BShepherd = require('ble-shepherd'),
+	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
+    // central = new BShepherd('cc-bnp', '/dev/ttyACM0', options); // use 'cc-bnp' when cc2540 USB dongle is used.
+    
 /**********************************/
 /* Start Demo App                 */
 /**********************************/                                                                                                                   
-sampleCodeDemo();
+sampleCodeDemo(central);
 
 /**********************************/
 /* Module Menu List               */
 /**********************************/
-function sampleCodeDemo () {
+function sampleCodeDemo (central) {
     console.log('---------------------------------------------------------------');   
     console.log("   Hiver IoT starter Kit for BLE Application. ");
     console.log(" ");    
@@ -44,20 +54,20 @@ function sampleCodeDemo () {
 		switch(data) 
 		{
 			case "1":
-				powerMeterRelay();	
+				powerMeterRelay(central);	
 			break;
 			case "2":
-                weatherStation();
+                weatherStation(central);
 			break;
 			case "3":
-                gasAlarm();
+                gasAlarm(central);
 			break;
 			case "4":
-                remoteControl();
+                remoteControl(central);
 			break;            
 			default :
 				console.log("Choose a valid option :  ");
-				sampleCodeDemo();
+				sampleCodeDemo(central);
 		}
 	});
 }

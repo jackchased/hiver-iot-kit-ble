@@ -1,16 +1,6 @@
 // sample code for BLE gas alarm module
 var _ = require('busyman'),
     chalk = require('chalk');
-    
-var options = {
-        baudRate: 115200,
-        rtscts: true,
-        flowControl: true
-    };
-
-var BShepherd = require('ble-shepherd'),
-	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
-    // central = new BShepherd('cc-bnp', '/dev/ttyACM0', options); // use 'cc-bnp' when cc2540 USB dongle is used.
 
 var gasSensorPlugin = require('bshep-plugin-sivann-gassensor'); 
 
