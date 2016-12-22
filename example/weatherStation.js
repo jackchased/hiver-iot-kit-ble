@@ -85,7 +85,7 @@ function bleApp (central) {
 					
 					weatherStation.write('0xbb80', '0xbb82', {period: 250}, function (err) {
                         if (err) 
-                            console.log('[         error ] failed to change period. ' + err);
+                            console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
                         else 
                             console.log('[ debug message ] changed the reporting period to 2.5s.'); // (recommend range: 100-255)
                     });
@@ -107,7 +107,7 @@ function bleApp (central) {
 							weatherStation1.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particle Matter)
                             weatherStation1.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });
@@ -125,7 +125,7 @@ function bleApp (central) {
 							weatherStation2.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM
                             weatherStation2.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });

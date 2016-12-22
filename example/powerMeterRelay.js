@@ -77,7 +77,7 @@ function bleApp (central) {
                     relay.onNotified('0xbb10', '0xcc02', callbackAIn);      // AIn                    
                     relay.write('0xbb30', '0xbb32', {period: 250}, function (err) {
                         if (err) 
-                            console.log('[         error ] failed to change the period. ' + err);
+                            console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                         else 
                             console.log('[ debug message ] changed the reporting period to 2.5s.'); // (recommend range: 100-255)
                     });                             
@@ -94,7 +94,7 @@ function bleApp (central) {
                             relay1.onNotified('0xbb90', '0xcc06', callbackPir1);      // PIR 
                             relay1.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] failed to change the period. ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });                              																		
@@ -108,7 +108,7 @@ function bleApp (central) {
                             relay2.onNotified('0xbb90', '0xcc06', callbackPir2);      // PIR                            					
                             relay2.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] failed to change the period. ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             }); 
@@ -195,7 +195,7 @@ function callbackPir(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay to NO');
         });
@@ -204,7 +204,7 @@ function callbackPir(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay to NC');
         });
@@ -224,7 +224,7 @@ function callbackPir1(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay1.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay1 to NO');
         });
@@ -233,7 +233,7 @@ function callbackPir1(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay1.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay1 to NC');
         });
@@ -256,7 +256,7 @@ function callbackPir2(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay2.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay2 to NO');
         });
@@ -265,7 +265,7 @@ function callbackPir2(data) {
         // relay service : 0xbb40, char: 0xcc0e
         relay2.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
             if (err) 
-                console.log('[         error ] ' + err);
+                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
                 console.log('[ debug message ] switch relay2 to NC');
         });
