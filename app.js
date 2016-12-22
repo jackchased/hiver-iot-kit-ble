@@ -27,8 +27,7 @@ function sampleCodeDemo () {
     console.log('   >>> plugin-meter-relay    v:' + pjson.dependencies['bshep-plugin-sivann-relay'] );
     console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
     console.log('   >>> plugin-weatherstation v:' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
-    console.log('   >>> plugin-remotecontrol  v:' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );
-    console.log('---------------------------------------------------------------');   
+    console.log('   >>> plugin-remotecontrol  v:' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );  
     console.log("   >>> BLE Module Demo Option Menu.");
     console.log(" "); 
     console.log("       1.  Power Meter Relay       ");

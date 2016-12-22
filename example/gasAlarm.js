@@ -15,7 +15,7 @@ var BShepherd = require('ble-shepherd'),
 var gasSensorPlugin = require('bshep-plugin-sivann-gassensor'); 
 
 function app () {
-    central.support('relay', relayPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
+    central.support('gasSensor', relayPlugin); // give a device name to the module you are going to use. This name will be used in further applications.
     central.start();
     
 /**********************************/
