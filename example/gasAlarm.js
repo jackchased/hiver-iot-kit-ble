@@ -167,7 +167,7 @@ function buzzerHdlr(data) {
 
 function gasHdlr(data) {
     // show gas
-	console.log('[ debug message ] Gas Concentration: ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+	console.log('[ debug message ] Gas Concentration: ' + data.sensorValue.toFixed(1) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 

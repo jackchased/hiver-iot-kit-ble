@@ -69,7 +69,7 @@ function bleApp (central) {
 					// weatherStation.configNotify('0xbb80', 65, true);        // UV Index
 					// weatherStation.configNotify('0xbb80', 69, true);        // illuminance
 					// weatherStation.configNotify('0xbb80', '0xcc11', true);  // barometer
-					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // microphone
+					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // Loudness
 					// weatherStation.configNotify('0xbb80', '0xcc1b', true);  // PM (Particle Matter)
 					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn   
                     weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn
@@ -80,7 +80,7 @@ function bleApp (central) {
                     weatherStation.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
                     weatherStation.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
                     weatherStation.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-                    weatherStation.onNotified('0xbb80', '0xcc1a', micHdlr);			// microphone
+                    weatherStation.onNotified('0xbb80', '0xcc1a', loudnessHdlr);			// Loudness
                     weatherStation.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                     weatherStation.onNotified('0xbb00', '0xcc00', callbackDIn);		// DIn
                     weatherStation.onNotified('0xbb10', '0xcc02', callbackAIn);		// AIn
@@ -105,7 +105,7 @@ function bleApp (central) {
 							weatherStation1.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation1.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation1.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation1.onNotified('0xbb80', '0xcc1a', micHdlr);		// microphone
+							weatherStation1.onNotified('0xbb80', '0xcc1a', loudnessHdlr);		// Loudness
 							weatherStation1.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation1.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
@@ -123,7 +123,7 @@ function bleApp (central) {
 							weatherStation2.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation2.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation2.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation2.onNotified('0xbb80', '0xcc1a', micHdlr);		// microphone
+							weatherStation2.onNotified('0xbb80', '0xcc1a', loudnessHdlr);		// Loudness
 							weatherStation2.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation2.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
@@ -169,13 +169,13 @@ function bleApp (central) {
 /*****************************************************/
 function tempHdlr(data) {
     // show temp
-	console.log('[ debug message ] Temperature : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+	console.log('[ debug message ] Temperature : ' + data.sensorValue.toFixed(1) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function humidHdlr(data) {
     // show humid
-	console.log('[ debug message ] Humidity : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+	console.log('[ debug message ] Humidity : ' + data.sensorValue.toFixed(1) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
@@ -197,15 +197,15 @@ function barometerHdlr(data) {
 	/***  write your application here   ***/
 }
 
-function micHdlr(data) {
-    // show mic
-	console.log('[ debug message ] Sound Level : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+function loudnessHdlr(data) {
+    // show loudness
+	console.log('[ debug message ] Sound Level : ' + data.sensorValue.toFixed(1) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 
 function pmHdlr(data) {
     // show pm
-    console.log('[ debug message ] Particulate Matter : ' + data.sensorValue + ' ' + data.units);
+    console.log('[ debug message ] Particulate Matter : ' + data.sensorValue.toFixed(1) + ' ' + data.units);
 	/***  write your application here   ***/
 }
 

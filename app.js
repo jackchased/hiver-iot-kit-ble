@@ -65,10 +65,11 @@ function sampleCodeDemo (central) {
                 weatherStation(central); // you can modify sample code in ./example/
 			break;
 			case "3":
-                console.log("The alarm may be false triggered if the gas modules is not preheated long enough. ");
+                console.log("** The alarm may be false triggered if the gas modules is not preheated long enough. ");
                 gasAlarm(central);      // you can modify sample code in ./example/
 			break;
 			case "4":
+                console.log("** Press any key to start broadcasting and join the network.");
                 remoteControl(central); // you can modify sample code in ./example/
 			break;            
 			default :
