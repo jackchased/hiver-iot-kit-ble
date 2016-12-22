@@ -51,9 +51,11 @@ function bleApp (central) {
 		switch (msg.type) {
             /*** devIncoming      ***/        
 			case 'devIncoming':
-                var fwRev = dev.findChar('0x180a', '0x2a26').value.firmwareRev;
-                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ' ' + fwRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
-                
+                if (dev.name)  
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                else
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', failed to recognize this incoming device.');
+                                  
 				if(dev.name === 'gasSensor') {
 					gasSensor = dev;					                  
                     /***  write your application here   ***/          
@@ -73,19 +75,19 @@ function bleApp (central) {
                     gasSensor.onNotified('0xbb10', '0xcc02', callbackAIn);	// AIn                    
                     gasSensor.write('0xbb50', '0xbb52', {period: 250}, function (err) {
                         if (err) 
-                            console.log('[         error ] failed to change the period. ' + err);
+                            console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                         else 
                             console.log('[ debug message ] changed the reporting period to 2.5s.'); // (recommend range: 100-255)
                     });
 					gasSensor.write('0xbb50', '0xbb53', {option: 1}, function (err) { // option 0:Propane(default), 1:Smoke, 2:Methane, 3:Ethanol
                         if (err) 
-                            console.log('[         error ] failed to change the option. ' + err);
+                            console.log(chalk.red('[         error ]') + ' failed to change the option. ' + err);
                         else 
                             console.log('[ debug message ] changed the measuring gas option to Smoke.'); 
                     });
 					gasSensor.write('0xbb50', '0xbb54', {threshold: 500}, function (err) { // threshold range: 10-10000
                         if (err)
-                            console.log('[         error ] failed to change the threshold. ' + err);
+                            console.log(chalk.red('[         error ]') + ' failed to change the threshold. ' + err);
                         else 
                             console.log('[ debug message ] changed the gas threshold value to 500 ppm.');  
                     });
@@ -102,7 +104,7 @@ function bleApp (central) {
 							gasSensor1.onNotified('0xbb50', '0xcc04', gasHdlr);    // gas
                             gasSensor1.write('0xbb50', '0xbb52', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] failed to change the period. ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });                              																		
@@ -116,7 +118,7 @@ function bleApp (central) {
 							gasSensor2.onNotified('0xbb50', '0xcc04', gasHdlr);    // gas                           					
                             gasSensor2.write('0xbb50', '0xbb52', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] failed to change the period. ' + err);
+                                    console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });
