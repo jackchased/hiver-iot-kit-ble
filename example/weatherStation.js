@@ -52,8 +52,9 @@ function bleApp (central) {
 		switch (msg.type) {
             /*** devIncoming      ***/
 			case 'devIncoming':
-                console.log('[   devIncoming ] ' + '@' + dev.addr + ', ' + dev.name ); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
-
+                var fwRev = dev.findChar('0x180a', '0x2a26').value.firmwareRev;
+                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ' ' + fwRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+  
 				if(dev.name === 'weatherStation') {
 					weatherStation = dev;
                     /***  write your application here   ***/
@@ -84,7 +85,7 @@ function bleApp (central) {
 					
 					weatherStation.write('0xbb80', '0xbb82', {period: 250}, function (err) {
                         if (err) 
-                            console.log('[         error ] ' + err);
+                            console.log('[         error ] failed to change period. ' + err);
                         else 
                             console.log('[ debug message ] changed the reporting period to 2.5s.'); // (recommend range: 100-255)
                     });

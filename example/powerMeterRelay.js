@@ -77,7 +77,7 @@ function bleApp (central) {
                     relay.onNotified('0xbb10', '0xcc02', callbackAIn);      // AIn                    
                     relay.write('0xbb30', '0xbb32', {period: 250}, function (err) {
                         if (err) 
-                            console.log('[         error ] ' + err);
+                            console.log('[         error ] failed to change the period. ' + err);
                         else 
                             console.log('[ debug message ] changed the reporting period to 2.5s.'); // (recommend range: 100-255)
                     });                             
@@ -94,7 +94,7 @@ function bleApp (central) {
                             relay1.onNotified('0xbb90', '0xcc06', callbackPir1);      // PIR 
                             relay1.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] ' + err);
+                                    console.log('[         error ] failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             });                              																		
@@ -108,7 +108,7 @@ function bleApp (central) {
                             relay2.onNotified('0xbb90', '0xcc06', callbackPir2);      // PIR                            					
                             relay2.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
-                                    console.log('[         error ] ' + err);
+                                    console.log('[         error ] failed to change the period. ' + err);
                                 else 
                                     console.log('[ debug message ] changed the reporting period to 2.55s.'); // (recommend range: 100-255)
                             }); 
