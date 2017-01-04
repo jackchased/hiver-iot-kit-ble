@@ -19,10 +19,10 @@
   "homepage": "https://github.com/sivann-tw/hiver-iot-kit-ble#readme",
   "dependencies": {
     "ble-shepherd": "1.1.2",
-    "bshep-plugin-sivann-gassensor": "^0.1.0",
-    "bshep-plugin-sivann-relay": "^0.1.0",
-    "bshep-plugin-sivann-weatherstation": "^0.1.0",
-    "bshep-plugin-sivann-remotecontrol": "^0.1.0",
+    "bshep-plugin-sivann-gassensor": "^1.0.1",
+    "bshep-plugin-sivann-relay": "^1.0.0",
+    "bshep-plugin-sivann-weatherstation": "^1.0.0",
+    "bshep-plugin-sivann-remotecontrol": "^1.0.0",
     "chalk": "^1.1.3",
     "busyman": "^0.2.0"
   }
