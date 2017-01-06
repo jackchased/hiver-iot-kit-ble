@@ -53,7 +53,7 @@ function bleApp (central) {
             /*** devIncoming      ***/
 			case 'devIncoming':
                 if (dev.name)  
-                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firmware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 else
                     console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', failed to recognize this incoming device.');
                     
@@ -71,8 +71,8 @@ function bleApp (central) {
 					// weatherStation.configNotify('0xbb80', '0xcc11', true);  // barometer
 					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // Loudness
 					// weatherStation.configNotify('0xbb80', '0xcc1b', true);  // PM (Particle Matter)
-					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn   
-                    weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn
+					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn  Set to false to disable the notification
+                    weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn  Set to false to disable the notification
 					
 					// Register your handler to handle notification or indication of each Characteristic.
                     weatherStation.onNotified('0xbb80', '0xcc07', tempHdlr);		// temperature
@@ -105,7 +105,7 @@ function bleApp (central) {
 							weatherStation1.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation1.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation1.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation1.onNotified('0xbb80', '0xcc1a', loudnessHdlr);		// Loudness
+							weatherStation1.onNotified('0xbb80', '0xcc1a', loudnessHdlr);	// Loudness
 							weatherStation1.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation1.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 
@@ -123,7 +123,7 @@ function bleApp (central) {
 							weatherStation2.onNotified('0xbb80', 65, uvIndexHdlr);			// UV Index
 							weatherStation2.onNotified('0xbb80', 69, ambientLightHdlr);		// illuminance
 							weatherStation2.onNotified('0xbb80', '0xcc11', barometerHdlr);	// barometer
-							weatherStation2.onNotified('0xbb80', '0xcc1a', loudnessHdlr);		// Loudness
+							weatherStation2.onNotified('0xbb80', '0xcc1a', loudnessHdlr);	// Loudness
 							weatherStation2.onNotified('0xbb80', '0xcc1b', pmHdlr);			// PM (Particulate matter)
                             weatherStation2.write('0xbb80', '0xbb82', {period: 255}, function (err) {
                                 if (err) 

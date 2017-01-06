@@ -52,7 +52,7 @@ function bleApp (central) {
             /*** devIncoming      ***/        
 			case 'devIncoming':
                 if (dev.name)  
-                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firmware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 else
                     console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', failed to recognize this incoming device.');
                                   
@@ -67,15 +67,15 @@ function bleApp (central) {
                     // relay.configNotify('0xbb30', '0xcc1e', true); // Power
                     // relay.configNotify('0xbb30', '0xcc13', true); // Current   
                     // relay.configNotify('0xbb90', '0xcc06', true); // PIR  
-                    relay.configNotify('0xbb00', '0xcc00', false); // DIn   
-                    relay.configNotify('0xbb10', '0xcc02', false); // AIn
+                    relay.configNotify('0xbb00', '0xcc00', false); // DIn Set to false to disable the notification
+                    relay.configNotify('0xbb10', '0xcc02', false); // AIn Set to false to disable the notification
                     
                     // Register your handler to handle notification or indication of each Characteristic.
                     relay.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
                     relay.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
                     relay.onNotified('0xbb30', '0xcc13', callbackCurrent);  // Current
                     relay.onNotified('0xbb90', '0xcc06', callbackPir);      // PIR
-                    relay.onNotified('0xbb00', '0xcc00', callbackDIn);      // DIn
+                    relay.onNotified('0xbb00', '0xcc00', callbackDIn);      // DIn 
                     relay.onNotified('0xbb10', '0xcc02', callbackAIn);      // AIn                    
                     relay.write('0xbb30', '0xbb32', {period: 250}, function (err) {
                         if (err) 

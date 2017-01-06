@@ -52,7 +52,7 @@ function bleApp (central) {
             /*** devIncoming      ***/        
 			case 'devIncoming':
                 if (dev.name)  
-                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firmware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
                 else
                     console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', failed to recognize this incoming device.');
                                   
@@ -65,8 +65,8 @@ function bleApp (central) {
                     // you can also manually enable or disable the indication/notification of each Characteristic.
 					// gasSensor.configNotify('0xbb60', '0xcc28', true);	// buzzer
 					// gasSensor.configNotify('0xbb50', '0xcc04', true);	// gas
-                    gasSensor.configNotify('0xbb00', '0xcc00', false);	// DIn   
-                    gasSensor.configNotify('0xbb10', '0xcc02', false);	// AIn
+                    gasSensor.configNotify('0xbb00', '0xcc00', false);	// DIn  Set to false to disable the notification 
+                    gasSensor.configNotify('0xbb10', '0xcc02', false);	// AIn  Set to false to disable the notification
                     
                     // Register your handler to handle notification or indication of each Characteristic.
 					gasSensor.onNotified('0xbb60', '0xcc28', buzzerHdlr);	// buzzer
