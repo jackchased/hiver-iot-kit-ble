@@ -65,8 +65,8 @@ function bleApp (central) {
                     // you can also manually enable or disable the indication/notification of each Characteristic.
 					// gasSensor.configNotify('0xbb60', '0xcc28', true);	// buzzer
 					// gasSensor.configNotify('0xbb50', '0xcc04', true);	// gas
-                    gasSensor.configNotify('0xbb00', '0xcc00', false);	// DIn
-                    gasSensor.configNotify('0xbb10', '0xcc02', false);	// AIn
+                    gasSensor.configNotify('0xbb00', '0xcc00', false);	// DIn  Set to false to disable the notification
+                    gasSensor.configNotify('0xbb10', '0xcc02', false);	// AIn  Set to false to disable the notification
 
                     // Register your handler to handle notification or indication of each Characteristic.
 					gasSensor.onNotified('0xbb60', '0xcc28', buzzerHdlr);	// buzzer

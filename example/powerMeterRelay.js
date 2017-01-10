@@ -67,8 +67,8 @@ function bleApp (central) {
                     // relay.configNotify('0xbb30', '0xcc1e', true); // Power
                     // relay.configNotify('0xbb30', '0xcc13', true); // Current
                     // relay.configNotify('0xbb90', '0xcc06', true); // PIR
-                    relay.configNotify('0xbb00', '0xcc00', false); // DIn
-                    relay.configNotify('0xbb10', '0xcc02', false); // AIn
+                    relay.configNotify('0xbb00', '0xcc00', false); // DIn  Set to false to disable the notification
+                    relay.configNotify('0xbb10', '0xcc02', false); // AIn  Set to false to disable the notification
 
                     // Register your handler to handle notification or indication of each Characteristic.
                     relay.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay

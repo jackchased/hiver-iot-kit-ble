@@ -71,8 +71,8 @@ function bleApp (central) {
 					// weatherStation.configNotify('0xbb80', '0xcc11', true);  // barometer
 					// weatherStation.configNotify('0xbb80', '0xcc1a', true);  // Loudness
 					// weatherStation.configNotify('0xbb80', '0xcc1b', true);  // PM (Particle Matter)
-					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn
-                    weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn
+					weatherStation.configNotify('0xbb00', '0xcc00', false); // DIn  Set to false to disable the notification
+                    weatherStation.configNotify('0xbb10', '0xcc02', false); // AIn  Set to false to disable the notification
 					
 					// Register your handler to handle notification or indication of each Characteristic.
                     weatherStation.onNotified('0xbb80', '0xcc07', tempHdlr);		// temperature
