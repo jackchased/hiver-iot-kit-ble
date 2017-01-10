@@ -35,12 +35,12 @@ function app (central) {
 var remoteCtrl, remoteCtrl1, remoteCtrl2;
 function bleApp (central) {
 	var blocker = central.blocker;
-    
+
 	/*** add your devices to blacklist ***/
 	//blocker.enable('black');         // enable blacklist service. Use blacklist to ban a known devices.
     //blocker.block('0x5c313e2bfb34'); // ban a specified device by its MAC address
- 
-	/*** add your devices to whitelist ***/	
+
+	/*** add your devices to whitelist ***/
     //blocker.enable('white');         // enable whitelist service. Use whitelist to block other unknown/unwanted BLE devices, and only specified devices can join your network.
 	//blocker.unblock('0x689e192a8e33');  // specify a device to join the network by using its MAC address
 	//blocker.unblock('0x20c38ff1c486');
@@ -53,23 +53,23 @@ function bleApp (central) {
             /*** devIncoming      ***/
 			case 'devIncoming':
                 if (dev.name)  
-                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firmware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist. 
+                    console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', ' + dev.name + ', firmware ' + dev.findChar('0x180a', '0x2a26').value.firmwareRev); // display the device MAC and name. Use this MAC address for blacklist or whitelist.
                 else
                     console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr + ', failed to recognize this incoming device.');
-                                   
+
 				if(dev.name === 'remoteCtrl') {
 					remoteCtrl = dev;
                     /***  write your application here   ***/
-                    
+
                     // you can call the private function to enable all the indication/notification of each Characteristic automatically.
-                    configNotifyAll(remoteCtrl); 
+                    configNotifyAll(remoteCtrl);
                     // you can also manually enable or disable the indication/notification of each Characteristic.
                     // remoteCtrl.configNotify('0xbb70', '0xcc32', true); // multiState key
-                    
+
                     // Register your handler to handle notification or indication of each Characteristic.
                     remoteCtrl.onNotified('0xbb70', '0xcc32', remoteCtrlHdlr);    // multiState key
 
-                    /*** you will have to switch case between device addresses only if you have multiple remote control modules. ***/       
+                    /*** you will have to switch case between device addresses only if you have multiple remote control modules. ***/
 /*                    switch (dev.addr) {
                         case '0x689e192a8e33':
                             //  write your application for the 1st remote control  //
@@ -83,8 +83,8 @@ function bleApp (central) {
                             configNotifyAll(remoteCtrl2);
                             remoteCtrl2.onNotified('0xbb70', '0xcc32', remoteCtrlHdlr);    // multiState key
 							break;
-                    }  
- */  
+                    }
+ */
 				}
 				break;
 
