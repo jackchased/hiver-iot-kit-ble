@@ -85,7 +85,7 @@ function bleApp (central) {
                             });
                         }
                     });
-					gasSensor.write('0xbb50', '0xbb53', {option: 1}, function (err) { // option 0:Propane(default), 1:Smoke, 2:Methane, 3:Ethanol
+					gasSensor.write('0xbb50', '0xbb53', {option: 1}, function (err) { // option 0:Propane, 1:Smoke(default), 2:Methane, 3:Ethanol
                         if (err)
                             console.log(chalk.red('[         error ]') + ' failed to change the option. ' + err);
                         else 
