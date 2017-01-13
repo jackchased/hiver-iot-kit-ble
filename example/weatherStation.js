@@ -93,7 +93,7 @@ function bleApp (central) {
                                 if (err)
                                     console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                 else
-                                    console.log('[ debug message ] changed the reporting period to ' + value.period / 100 + 's.'); // (recommend range: 100-255)
+                                    console.log('[ debug message ] changed the reporting period to ' + value.period / 100 + 's.'); // (recommend range: 100-255). Minimum period is 1s.
                             });
                         }
                     });
@@ -117,7 +117,7 @@ function bleApp (central) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
                                 else {
-                                    weatherStation.read('0xbb80', '0xbb82', function (err, value) {
+                                    weatherStation1.read('0xbb80', '0xbb82', function (err, value) {
                                         if (err)
                                             console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                         else
@@ -141,7 +141,7 @@ function bleApp (central) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change period. ' + err);
                                 else {
-                                    weatherStation.read('0xbb80', '0xbb82', function (err, value) {
+                                    weatherStation2.read('0xbb80', '0xbb82', function (err, value) {
                                         if (err)
                                             console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                         else
