@@ -74,7 +74,9 @@ function bleApp (central) {
                     relay.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
                     relay.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
                     relay.onNotified('0xbb30', '0xcc13', callbackCurrent);  // Current
-                    relay.onNotified('0xbb90', '0xcc06', callbackPir);      // PIR
+                    relay.onNotified('0xbb90', '0xcc06', function(data) {
+                        callbackPir(data, relay);  // PIR
+                    });     
                     relay.onNotified('0xbb00', '0xcc00', callbackDIn);      // DIn
                     relay.onNotified('0xbb10', '0xcc02', callbackAIn);      // AIn
                     relay.write('0xbb30', '0xbb32', {period: 250}, function (err) {
@@ -99,7 +101,9 @@ function bleApp (central) {
                             configNotifyAll(relay1);
                             relay1.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
                             relay1.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
-                            relay1.onNotified('0xbb90', '0xcc06', callbackPir1);     // PIR
+                            relay1.onNotified('0xbb90', '0xcc06', function(data) {
+                                callbackPir(data, relay1);  // PIR
+                            });     
                             relay1.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err)
                                     console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
@@ -119,7 +123,9 @@ function bleApp (central) {
                             configNotifyAll(relay2);
                             relay2.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
                             relay2.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
-                            relay2.onNotified('0xbb90', '0xcc06', callbackPir2);     // PIR
+                            relay2.onNotified('0xbb90', '0xcc06', function(data) {
+                                callbackPir(data, relay2);  // PIR
+                            });     
                             relay2.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
@@ -191,92 +197,31 @@ function callbackCurrent(data) {
     /***  write your application here   ***/
 }
 
-function callbackPir(data) {
+function callbackPir(data, dev) {
     var pwrCtrlChar;
 
     // show pir state
-    console.log('[ debug message ] PIR State: ' + data.dInState);
+    console.log('[ debug message ] PIR@ ' + dev.addr + ' State: ' + data.dInState);
 
     /*** Example: interaction between PIR state and Relay switch   ***/
-    if (data.dInState && relay) {
+    if (data.dInState && dev) {
         // if PIR is triggered and relay is present, then switch relay to NO
         // relay service : 0xbb40, char: 0xcc0e
-        relay.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
+        dev.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
             if (err)
                 console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else
-                console.log('[ debug message ] switch relay to NO');
+                console.log('[ debug message ] switch relay@' + dev.addr + ' to NO');
         });
-    } else if (!data.dInState && relay) {
+    } else if (!data.dInState && dev) {
         // if PIR is not triggered and relay is present, then switch relay to NC
         // relay service : 0xbb40, char: 0xcc0e
-        relay.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
+        dev.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
             if (err) 
                 console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
             else 
-                console.log('[ debug message ] switch relay to NC');
+                console.log('[ debug message ] switch relay@' + dev.addr + ' to NC');
         });
-    }
-}
-
-function callbackPir1(data) {
-    var pwrCtrlChar;
-
-    // show pir1 state
-    console.log('[ debug message ] PIR1 State: ' + data.dInState);
-
-    /*** Example: interaction between PIR state and Relay switch   ***/
-    if (data.dInState && relay1) {
-        // if PIR1 is triggered and relay1 is present, then switch relay1 to NO
-        // relay service : 0xbb40, char: 0xcc0e
-        relay1.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
-            if (err)
-                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
-            else
-                console.log('[ debug message ] switch relay1 to NO');
-        });
-    } else if (!data.dInState && relay1) {
-        // if PIR1 is not triggered and relay1 is present, then switch relay1 to NC
-        // relay service : 0xbb40, char: 0xcc0e
-        relay1.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
-            if (err)
-                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
-            else
-                console.log('[ debug message ] switch relay1 to NC');
-        });
-
-    }
-}
-
-function callbackPir2(data) {
-    var pwrCtrlChar;
-
-    // show pir2 state
-    if(data.dInState)
-        console.log('[ debug message ] PIR2 State: ' + data.dInState);
-    else
-        console.log('[ debug message ] PIR2 State: ' + data.dInState);
-
-    /*** Example: interaction between PIR state and Relay switch   ***/
-    if (data.dInState && relay2) {
-        // if PIR2 is triggered and relay2 is present, then switch relay2 to NO
-        // relay service : 0xbb40, char: 0xcc0e
-        relay2.write('0xbb40', '0xcc0e', {onOff: 1}, function (err) {
-            if (err)
-                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
-            else
-                console.log('[ debug message ] switch relay2 to NO');
-        });
-    } else if (!data.dInState && relay2) {
-        // if PIR2 is not triggered and relay2 is present, then switch relay2 to NC
-        // relay service : 0xbb40, char: 0xcc0e
-        relay2.write('0xbb40', '0xcc0e', {onOff: 0}, function (err) {
-            if (err)
-                console.log(chalk.red('[         error ]') + ' failed to switch onOff. ' + err);
-            else
-                console.log('[ debug message ] switch relay2 to NC');
-        });
-
     }
 }
 
