@@ -71,10 +71,16 @@ function bleApp (central) {
                     relay.configNotify('0xbb10', '0xcc02', false); // AIn  Set to false to disable the notification
 
                     // Register your handler to handle notification or indication of each Characteristic.
-                    relay.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
-                    relay.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
-                    relay.onNotified('0xbb30', '0xcc13', callbackCurrent);  // Current
-                    relay.onNotified('0xbb90', '0xcc06', function(data) {
+                    relay.onNotified('0xbb40', '0xcc0e', function (data) {
+                        callbackRelay(data, relay);  // Relay
+                    });     
+                    relay.onNotified('0xbb30', '0xcc1e', function (data) {
+                        callbackPower(data, relay);  // Power
+                    });  
+                    relay.onNotified('0xbb30', '0xcc13', function (data) {
+                        callbackCurrent(data, relay);  // Current
+                    });
+                    relay.onNotified('0xbb90', '0xcc06', function (data) {
                         callbackPir(data, relay);  // PIR
                     });     
                     relay.onNotified('0xbb00', '0xcc00', callbackDIn);      // DIn
@@ -83,7 +89,7 @@ function bleApp (central) {
                         if (err) 
                             console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                         else {
-                            gasSensor.read('0xbb30', '0xbb32', function (err, value) {
+                            relay.read('0xbb30', '0xbb32', function (err, value) {
                                 if (err)
                                     console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                 else
@@ -99,16 +105,20 @@ function bleApp (central) {
                             //  write your application for the 1st relay  //
                             relay1 = dev;
                             configNotifyAll(relay1);
-                            relay1.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
-                            relay1.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
-                            relay1.onNotified('0xbb90', '0xcc06', function(data) {
+                            relay1.onNotified('0xbb40', '0xcc0e', function (data) {
+                                callbackRelay(data, relay1);  // Relay
+                            });     
+                            relay1.onNotified('0xbb30', '0xcc1e', function (data) {
+                                callbackPower(data, relay1);  // Power
+                            });     
+                            relay1.onNotified('0xbb90', '0xcc06', function (data) {
                                 callbackPir(data, relay1);  // PIR
                             });     
                             relay1.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err)
                                     console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else {
-                                    gasSensor.read('0xbb30', '0xbb32', function (err, value) {
+                                    relay1.read('0xbb30', '0xbb32', function (err, value) {
                                         if (err)
                                             console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                         else
@@ -121,16 +131,20 @@ function bleApp (central) {
                             //  write your application for the 2nd relay  //
 							relay2 = dev;
                             configNotifyAll(relay2);
-                            relay2.onNotified('0xbb40', '0xcc0e', callbackRelay);    // Relay
-                            relay2.onNotified('0xbb30', '0xcc1e', callbackPower);    // Power
-                            relay2.onNotified('0xbb90', '0xcc06', function(data) {
+                            relay2.onNotified('0xbb40', '0xcc0e', function (data) {
+                                callbackRelay(data, relay2);  // Relay
+                            });     
+                            relay2.onNotified('0xbb30', '0xcc1e', function (data) {
+                                callbackPower(data, relay2);  // Power
+                            }); 
+                            relay2.onNotified('0xbb90', '0xcc06', function (data) {
                                 callbackPir(data, relay2);  // PIR
                             });     
                             relay2.write('0xbb30', '0xbb32', {period: 255}, function (err) {
                                 if (err) 
                                     console.log(chalk.red('[         error ]') + ' failed to change the period. ' + err);
                                 else {
-                                    gasSensor.read('0xbb30', '0xbb32', function (err, value) {
+                                    relay2.read('0xbb30', '0xbb32', function (err, value) {
                                         if (err)
                                             console.log(chalk.red('[         error ]') + ' failed to read period. ' + err);
                                         else
@@ -179,21 +193,21 @@ function bleApp (central) {
 /*****************************************************/
 /*    Power Meter Relay Callback Handler             */
 /*****************************************************/
-function callbackRelay(data) {
+function callbackRelay(data, dev) {
     // show relay state
-    console.log('[ debug message ] Relay State: ' + data.onOff);
+    console.log('[ debug message ] Relay@' + dev.addr + ' State: ' + data.onOff);
     /***  write your application here   ***/
 }
 
-function callbackPower(data) {
+function callbackPower(data, dev) {
     // show power
-    console.log('[ debug message ] Power : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+    console.log('[ debug message ] Power@' + dev.addr + ' : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
     /***  write your application here   ***/
 }
 
-function callbackCurrent(data) {
+function callbackCurrent(data, dev) {
     // show current
-    console.log('[ debug message ] Current : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
+    console.log('[ debug message ] Current@' + dev.addr + ' : ' + data.sensorValue.toFixed(2) + ' ' + data.units);
     /***  write your application here   ***/
 }
 
@@ -201,7 +215,7 @@ function callbackPir(data, dev) {
     var pwrCtrlChar;
 
     // show pir state
-    console.log('[ debug message ] PIR@ ' + dev.addr + ' State: ' + data.dInState);
+    console.log('[ debug message ] PIR@' + dev.addr + ' State: ' + data.dInState);
 
     /*** Example: interaction between PIR state and Relay switch   ***/
     if (data.dInState && dev) {
