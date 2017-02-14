@@ -29,7 +29,7 @@ sampleCodeDemo(central);
 /**********************************/
 /* set Leave Msg                  */
 /**********************************/
-setLeaveMsg()
+setLeaveMsg();
 
 /**********************************/
 /* Module Menu List               */
@@ -38,7 +38,7 @@ function sampleCodeDemo (central) {
     console.log('---------------------------------------------------------------');   
     console.log("   Hiver IoT starter Kit for BLE Application. ");
     console.log(" ");    
-    console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);    
+    console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);    w3AQ
     console.log('   >>> plugin-meter-relay    v:' + pjson.dependencies['bshep-plugin-sivann-relay'] );
     console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
     console.log('   >>> plugin-weatherstation v:' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
@@ -53,7 +53,6 @@ function sampleCodeDemo (central) {
     console.log("   Please key in your option [1-4] and hit enter:");
     
 	readConsoleInput (function(data) {
-        console.log(data);
         showWelcomeMsg();
         console.log("Please power on your modules. ");
 		switch(data) 
@@ -112,14 +111,6 @@ function showWelcomeMsg() {
 /* Goodbye Msg Function           */
 /**********************************/
 function setLeaveMsg() {
-    process.stdin.resume();
-
-    function stopShepherd() {
-        central.stop(function () {
-            process.exit(1);
-        });
-    }
-
     function showLeaveMessage() {
         console.log(' ');
         console.log(chalk.blue('      _____              __      __                  '));
@@ -134,8 +125,7 @@ function setLeaveMsg() {
         console.log(' ');
     }
 
-    process.on('SIGINT', stopShepherd);
-    process.on('exit', showLeaveMessage);
+    process.once('exit', showLeaveMessage);
 }
 
 /**********************************/
