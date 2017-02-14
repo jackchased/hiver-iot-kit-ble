@@ -38,7 +38,7 @@ function sampleCodeDemo (central) {
     console.log('---------------------------------------------------------------');   
     console.log("   Hiver IoT starter Kit for BLE Application. ");
     console.log(" ");    
-    console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);    w3AQ
+    console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);
     console.log('   >>> plugin-meter-relay    v:' + pjson.dependencies['bshep-plugin-sivann-relay'] );
     console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
     console.log('   >>> plugin-weatherstation v:' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
