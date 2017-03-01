@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node app"
+    "start": "NODE_ENV=production node --nowarn_template_set app"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/sivann-tw/hiver-iot-kit-ble#readme",
   "dependencies": {
-    "ble-shepherd": "1.1.2",
+    "ble-shepherd": "1.1.4",
     "bshep-plugin-sivann-gassensor": "1.0.1",
     "bshep-plugin-sivann-relay": "1.0.0",
     "bshep-plugin-sivann-weatherstation": "1.0.0",

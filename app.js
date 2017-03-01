@@ -9,6 +9,7 @@ var chalk = require('chalk'),
     gasAlarm = require('./example/gasAlarm'),
     powerMeterRelay = require('./example/powerMeterRelay'),
     weatherStation = require('./example/weatherStation'),
+    multiSensor = require('./example/multipleSensorType');
     remoteControl = require('./example/remoteControl');
 
     var options = {
@@ -49,8 +50,9 @@ function sampleCodeDemo (central) {
     console.log("       2.  Weather Station         ");
     console.log("       3.  Gas Alarm               ");
     console.log("       4.  Remote Controller       ");
+    console.log("       5.  Multiple Sensor Types   ");    
     console.log(" ");         
-    console.log("   Please key in your option [1-4] and hit enter:");
+    console.log("   Please key in your option [1-5] and hit enter:");
     
 	readConsoleInput (function(data) {
         showWelcomeMsg();
@@ -70,7 +72,10 @@ function sampleCodeDemo (central) {
 			case "4":
                 console.log("** Press any key to start broadcasting and join the network.");
                 remoteControl(central); // you can modify sample code in ./example/
-			break;            
+			break;
+			case "5":
+                multiSensor(central); // you can modify sample code in ./example/
+			break;             
 			default :
 				console.log("Choose a valid option :  ");
 				sampleCodeDemo(central);
