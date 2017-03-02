@@ -172,7 +172,6 @@ function app (central) {
             /***   devStatus     ***/
             case 'devStatus':
                 console.log('[     devStatus ] ' + '@' + dev.addr + ', ' + msg.data);
-                //console.dir(dev.servs);
                 break;
 
             /***   devLeaving    ***/
