@@ -9,8 +9,11 @@ var chalk = require('chalk'),
     gasAlarm = require('./example/gasAlarm'),
     powerMeterRelay = require('./example/powerMeterRelay'),
     weatherStation = require('./example/weatherStation'),
+    remoteControl = require('./example/remoteControl'),
+    pir = require('./example/pir'),
+    nineAxis = require('./example/nineAxis'),
     multiSensor = require('./example/multipleSensorType');
-    remoteControl = require('./example/remoteControl');
+
 
     var options = {
         baudRate: 115200,
@@ -19,12 +22,12 @@ var chalk = require('chalk'),
     };
 
 var BShepherd = require('ble-shepherd'),
-	central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
+    central = new BShepherd('noble');   // use 'noble' when a BLE USB adaptor is used 
     // central = new BShepherd('cc-bnp', '/dev/ttyACM0', options); // use 'cc-bnp' when cc2540 USB dongle is used.
-    
+
 /**********************************/
 /* Start Demo App                 */
-/**********************************/                                                                                                                   
+/**********************************/
 sampleCodeDemo(central);
 
 /**********************************/
@@ -36,51 +39,63 @@ setLeaveMsg();
 /* Module Menu List               */
 /**********************************/
 function sampleCodeDemo (central) {
-    console.log('---------------------------------------------------------------');   
+    console.log('---------------------------------------------------------------');
     console.log("   Hiver IoT starter Kit for BLE Application. ");
-    console.log(" ");    
+    console.log(" ");
     console.log("   >>> hiver-iot-kit-ble     v:" + pjson.version);
     console.log('   >>> plugin-meter-relay    v:' + pjson.dependencies['bshep-plugin-sivann-relay'] );
-    console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] ); 
+    console.log('   >>> plugin-gassensor      v:' + pjson.dependencies['bshep-plugin-sivann-gassensor'] );
     console.log('   >>> plugin-weatherstation v:' + pjson.dependencies['bshep-plugin-sivann-weatherstation'] );
-    console.log('   >>> plugin-remotecontrol  v:' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );  
+    console.log('   >>> plugin-remotecontrol  v:' + pjson.dependencies['bshep-plugin-sivann-remotecontrol'] );
+    console.log('   >>> plugin-pir            v:' + pjson.dependencies['bshep-plugin-sivann-pir'] );
+    console.log('   >>> plugin-nineaxis       v:' + pjson.dependencies['bshep-plugin-sivann-nineaxis'] );
     console.log("   >>> BLE Module Demo Option Menu.");
-    console.log(" "); 
+    console.log(" ");
     console.log("       1.  Power Meter Relay       ");
     console.log("       2.  Weather Station         ");
     console.log("       3.  Gas Alarm               ");
     console.log("       4.  Remote Controller       ");
-    console.log("       5.  Multiple Sensor Types   ");    
+    console.log("       5.  PIR                     ");
+    console.log("       6.  Nine Axis               ");
+    console.log("       7.  Multiple Sensor Types   ");
     console.log(" ");         
-    console.log("   Please key in your option [1-5] and hit enter:");
-    
-	readConsoleInput (function(data) {
+    console.log("   Please key in your option [1-7] and hit enter:");
+
+    readConsoleInput (function(data) {
         showWelcomeMsg();
         console.log("Please power on your modules. ");
-		switch(data) 
-		{
-			case "1":
-				powerMeterRelay(central); // you can modify sample code in ./example/
-			break;
-			case "2":
+        switch(data)
+        {
+            case "1":
+                powerMeterRelay(central); // you can modify sample code in ./example/
+            break;
+            case "2":
                 weatherStation(central); // you can modify sample code in ./example/
-			break;
-			case "3":
+            break;
+            case "3":
                 console.log("** The alarm may be false triggered if the gas modules is not preheated long enough. ");
                 gasAlarm(central);      // you can modify sample code in ./example/
-			break;
-			case "4":
+            break;
+            case "4":
                 console.log("** Press any key to start broadcasting and join the network.");
                 remoteControl(central); // you can modify sample code in ./example/
-			break;
-			case "5":
+            break;
+      case "5":
+                console.log("** Press any key to start broadcasting and join the network.");
+                pir(central); // you can modify sample code in ./example/
+            break;
+      case "6":
+                console.log("** Press any key to start broadcasting and join the network.");
+                nineAxis(central); // you can modify sample code in ./example/
+            break;
+            case "7":
                 multiSensor(central); // you can modify sample code in ./example/
-			break;             
-			default :
-				console.log("Choose a valid option :  ");
-				sampleCodeDemo(central);
-		}
-	});
+            break;             
+            default :
+                console.log("Choose a valid option :  ");
+                sampleCodeDemo(central);
+        }
+    });
 }
 
 /**********************************/
@@ -103,7 +118,7 @@ function showWelcomeMsg() {
     console.log(chalk.gray('         A network server and manager for the BLE machine network'));
     console.log('');
     console.log('   >>> Author:     Hedy Wang (hedywings@gmail.com)');
-    console.log('   >>> Version:    ble-shepherd v:' + pjson.dependencies['ble-shepherd'] );              
+    console.log('   >>> Version:    ble-shepherd v:' + pjson.dependencies['ble-shepherd'] );
     console.log('   >>> Document:   https://github.com/bluetoother/ble-shepherd');
     console.log('   >>> Copyright (c) 2016 Hedy Wang, The MIT License (MIT)');
     console.log('');
@@ -140,11 +155,11 @@ function readConsoleInput (callBack) {
     var stdin = process.openStdin(),
         input = stdin.listeners('data');
     
-	if ( input[0] && input ) {
+    if ( input[0] && input ) {
         stdin.removeListener("data", input[0] );
-	}
+    }
     
-	stdin.addListener ("data", function (data) {
-    	callBack(data.toString().trim());
-	});
+    stdin.addListener ("data", function (data) {
+        callBack(data.toString().trim());
+    });
 }
